@@ -1,7 +1,6 @@
-class CreateSismos < ActiveRecord::Migration[7.1]
+class CreateFeatures < ActiveRecord::Migration[7.1]
   def change
-    create_table :sismos, id: false  do |t|
-      t.string :id, null: false, primary_key: true
+    create_table :features, id: :string do |t|
       t.float :mag
       t.string :place
       t.datetime :time
