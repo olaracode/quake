@@ -16,6 +16,7 @@ const Home = () => {
     fetch(`${ENDPOINT}?page=${page}&limit=${limit}&query=${query}`)
       .then((res) => res.json())
       .then((data) => {
+        console.log(query);
         setTotal(data.pagination.total);
         setSeismicData(data);
       })
