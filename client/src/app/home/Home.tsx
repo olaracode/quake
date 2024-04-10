@@ -8,8 +8,7 @@ import Limit from "./components/Limit";
 import Query from "./components/Query";
 import usePagination from "../core/hooks/usePagination";
 import { useQuery } from "react-query";
-import Loading from "./components/Loading";
-const ENDPOINT = "http://localhost:3000/api/v1/sismos";
+const ENDPOINT = "http://localhost:3000/api/features";
 function getSeismicData(page: string, limit: string, query: string) {
   return fetch(`${ENDPOINT}?page=${page}&limit=${limit}&query=${query}`)
     .then((res) => res.json())
@@ -22,9 +21,8 @@ function getSeismicData(page: string, limit: string, query: string) {
 }
 const Home = () => {
   const { page, limit, query } = usePagination();
-  const { isLoading, isError, data, error } = useQuery(
-    `quake:${page}:${limit}:${query}`,
-    () => getSeismicData(page, limit, query)
+  const { isError, data } = useQuery(`quake:${page}:${limit}:${query}`, () =>
+    getSeismicData(page, limit, query)
   );
   if (isError) return <div>Error: Ha ocurrido un error</div>;
   return (

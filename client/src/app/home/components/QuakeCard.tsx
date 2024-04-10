@@ -7,10 +7,13 @@ import {
   StackItem,
   StackDivider,
   Button,
+  useDisclosure,
 } from "@chakra-ui/react";
 import { SeismicItem } from "../../core/types";
 import QuakeItem from "./QuakeItem";
+import QuakeDetails from "./QuakeDetails";
 const QuakeCard = ({ item }: { item: SeismicItem }) => {
+  const { isOpen, onOpen, onClose } = useDisclosure();
   const date = new Date(item.time).toLocaleString("es-ES", {
     weekday: "long",
     year: "numeric",
@@ -31,7 +34,10 @@ const QuakeCard = ({ item }: { item: SeismicItem }) => {
           <QuakeItem name="Magnitud" value={magnitude} />
           <QuakeItem name="Fecha" value={date} />
           <StackItem>
-            <Button size="xs">Detalles</Button>
+            <Button size="xs" onClick={onOpen}>
+              Detalles
+            </Button>
+            <QuakeDetails item={item} isOpen={isOpen} onClose={onClose} />
           </StackItem>
         </Stack>
       </CardBody>

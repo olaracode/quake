@@ -10,8 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.1].define(version: 2024_04_09_193340) do
-  create_table "sismos", id: :string, force: :cascade do |t|
+ActiveRecord::Schema[7.1].define(version: 2024_04_10_061616) do
+  create_table "comments", force: :cascade do |t|
+    t.text "content"
+    t.integer "feature_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["feature_id"], name: "index_comments_on_feature_id"
+  end
+
+  create_table "features", id: :string, force: :cascade do |t|
     t.float "mag"
     t.string "place"
     t.datetime "time"
@@ -25,4 +33,5 @@ ActiveRecord::Schema[7.1].define(version: 2024_04_09_193340) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "comments", "features"
 end

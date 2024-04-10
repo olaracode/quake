@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
-    namespace :v1 do
-      resources :sismos
+    resources :features do
+      get 'comments', on: :member
     end
   end
 end

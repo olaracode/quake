@@ -1,4 +1,3 @@
-import React from "react";
 import { StackItem, Heading, Text } from "@chakra-ui/react";
 const QuakeItem = ({
   name = "key",
