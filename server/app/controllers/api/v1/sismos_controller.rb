@@ -8,7 +8,7 @@ class Api::V1::SismosController < ApplicationController
         if per_page.to_i > 1000
             per_page = 1000
         end
-        @sismos = Sismo.all.paginate(page: page, per_page: per_page)
+        @sismos = Sismo.order(time: :desc).paginate(page: page, per_page: per_page)
         render json: {
             data: @sismos,
             pagination: {

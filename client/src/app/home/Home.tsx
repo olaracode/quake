@@ -29,7 +29,7 @@ const Home = () => {
   }, [limit, page, query]);
   return (
     <Container maxW="container.lg">
-      <Map />
+      <Map items={seismicData ? seismicData.data : []} />
       <Heading as="h2" textAlign="center">
         Informacion sismica de los ultimos 30 dias
       </Heading>

@@ -10,7 +10,6 @@ import {
   useDisclosure,
   Checkbox,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import usePagination from "../../core/hooks/usePagination";
 import { useNavigate } from "react-router-dom";
 const queryOptions = ["md", "ml", "ms", "mw", "me", "mi", "mb", "mlg"];

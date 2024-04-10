@@ -1,14 +1,18 @@
-import React from "react";
-import { Container } from "@chakra-ui/react";
+import { Icon, Tooltip } from "@chakra-ui/react";
+import { MdMyLocation } from "react-icons/md";
+
 import {
   ComposableMap,
   Geographies,
   Geography,
   Sphere,
+  Marker,
   Graticule,
 } from "react-simple-maps";
+import { SeismicItem } from "../types";
 import map from "../geojson/map.json";
-const Map = () => {
+
+const Map = ({ items = [] }: { items: SeismicItem[] }) => {
   return (
     <>
       <ComposableMap>
@@ -31,6 +35,21 @@ const Map = () => {
             ))
           }
         </Geographies>
+        {items.map((item) => (
+          <Marker
+            key={item.title}
+            coordinates={[item.longitude, item.latitude]}
+          >
+            <Tooltip label={`${item.title}`}>
+              <Icon
+                as={MdMyLocation}
+                _hover={{ color: "red.100" }}
+                color="red.500"
+                y={-2}
+              />
+            </Tooltip>
+          </Marker>
+        ))}
       </ComposableMap>
     </>
   );
