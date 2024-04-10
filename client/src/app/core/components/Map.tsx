@@ -12,7 +12,7 @@ import {
 import { SeismicItem } from "../types";
 import map from "../geojson/map.json";
 
-const Map = ({ items = [] }: { items: SeismicItem[] }) => {
+const Map = ({ items = [] }: { items?: SeismicItem[] }) => {
   return (
     <>
       <ComposableMap>

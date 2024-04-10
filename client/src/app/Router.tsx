@@ -5,18 +5,22 @@ import Home from "./home/Home";
 import EarthquakeDetails from "./earthquakes/Details";
 import NotFound from "./not_found/NotFound";
 import Navbar from "./core/components/Navbar";
+import { QueryClient, QueryClientProvider } from "react-query";
 
+const queryClient = new QueryClient();
 function App() {
   return (
     <BrowserRouter>
       <ChakraProvider theme={theme}>
-        <Box bgColor="brand.bg" color="white" minH="100vh" >
+        <Box bgColor="brand.bg" color="white" minH="100vh">
           <Navbar />
-          <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/earthquake/:id" element={<EarthquakeDetails />} />
-            <Route path="*" element={<NotFound/>} />
-          </Routes>
+          <QueryClientProvider client={queryClient}>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/earthquake/:id" element={<EarthquakeDetails />} />
+              <Route path="*" element={<NotFound />} />
+            </Routes>
+          </QueryClientProvider>
         </Box>
       </ChakraProvider>
     </BrowserRouter>

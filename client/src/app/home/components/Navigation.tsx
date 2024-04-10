@@ -11,14 +11,15 @@ const Navigation = ({
   limit: string;
 }) => {
   const navigate = useNavigate();
+  function navigateToParam(key: string, value: string) {
+    const newUrl = new URL(window.location.href);
+    newUrl.searchParams.set(key, value);
+    navigate(newUrl.search);
+  }
   return (
     <ButtonGroup isAttached size="xs">
       <Button
-        onClick={() => {
-          const newUrl = new URL(window.location.href);
-          newUrl.searchParams.set("page", (parseInt(page) - 1).toString());
-          navigate(newUrl.search);
-        }}
+        onClick={() => navigateToParam("page", (parseInt(page) - 1).toString())}
         isDisabled={parseInt(page) === 1}
       >
         Anterior
@@ -27,11 +28,7 @@ const Navigation = ({
         {page} de {Math.ceil(total / parseInt(limit))}
       </Button>
       <Button
-        onClick={() => {
-          const newUrl = new URL(window.location.href);
-          newUrl.searchParams.set("page", (parseInt(page) + 1).toString());
-          navigate(newUrl.search);
-        }}
+        onClick={() => navigateToParam("page", (parseInt(page) + 1).toString())}
         isDisabled={parseInt(page) * parseInt(limit) >= total}
       >
         Siguiente
