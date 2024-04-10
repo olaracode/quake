@@ -8,10 +8,12 @@ import {
   StackDivider,
   Button,
   useDisclosure,
+  SkeletonText,
 } from "@chakra-ui/react";
 import { SeismicItem } from "../../core/types";
 import QuakeItem from "./QuakeItem";
 import QuakeDetails from "./QuakeDetails";
+
 const QuakeCard = ({ item }: { item: SeismicItem }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const date = new Date(item.time).toLocaleString("es-ES", {
@@ -45,4 +47,23 @@ const QuakeCard = ({ item }: { item: SeismicItem }) => {
   );
 };
 
+const Skeleton = () => {
+  return (
+    <Card bg="brand.card" color="text-white">
+      <CardHeader display="flex" justifyContent={"space-between"}>
+        <Heading as="h3" fontSize="md">
+          <SkeletonText />
+        </Heading>
+      </CardHeader>
+      <CardBody>
+        <Stack divider={<StackDivider />}>
+          <SkeletonText />
+          <SkeletonText />
+        </Stack>
+      </CardBody>
+    </Card>
+  );
+};
+
+QuakeCard.Skeleton = Skeleton;
 export default QuakeCard;
