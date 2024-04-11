@@ -4,8 +4,7 @@ class Api::FeaturesController < ApplicationController
         page = params.fetch(:page, 1)
         per_page = params.fetch(:per_page, 10)
         # Magtype is going to be [ml, mt]
-        mag_type = params.fetch(:mag_type, nil)
-        mag_type = mag_type.gsub(/[\[\]"]/, '').split(',') if mag_type.present?
+        mag_type = params[:mag_type] # This will be an array if mag_type is passed as `mag_type[]=ml&mag_type[]=mt`
         # Soft limit
         if per_page.to_i > 1000
             per_page = 1000
@@ -15,14 +14,36 @@ class Api::FeaturesController < ApplicationController
         @features = Feature.order(time: :desc)
         @features = @features.where(magType: mag_type) if mag_type.present?
         @features = @features.paginate(page: page, per_page: per_page)
+
+        shaped_features = @features.map do |feature|
+            {
+                id: feature.id,
+                type: "feature",
+                attributes: {
+                    external_id: feature.id,
+                    magnitude: feature.mag,
+                    place: feature.place,
+                    time: feature.time,
+                    tsunami: feature.tsunami,
+                    mag_type: feature.magType,
+                    title: feature.title,
+                    coordinates: {
+                        longitude: feature.longitude,
+                        latitude: feature.latitude
+                    }
+                },
+                links: {
+                    external_url: feature.url
+                }
+            }
+        end
         render json: {
-            data: @features,
+            data: shaped_features,
             pagination: {
                 current_page: @features.current_page,
                 total: @features.total_entries,
                 per_page: @features.per_page
-            },
-            mag_type: mag_type
+            }
         }
     end
 
