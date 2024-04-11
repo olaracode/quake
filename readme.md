@@ -6,6 +6,13 @@ Basic setup for a React app with Rails backend using docker-compose.
 
 ## Quake
 
+Indice:
+
+- [Quake](#quake)
+  - [Features](#features)
+  - [Setup](#setup)
+  - [Postman](#postman)
+
 Quake es una aplicación fullstack que muestra los sismos ocurridos en el último mes en todo el mundo.
 
 > Data obtenida de: [earthquake.gov](https://www.usgs.gov/programs/earthquake-hazards)
@@ -57,3 +64,7 @@ rake sismologia:obtener_datos
 open http://localhost:3000 # Backend
 open http://localhost:5137 # Frontend
 ```
+
+### Postman
+
+Si usas postman puedes importar la colección de requests que se encuentra en el archivo [Quake.postman_collection.json#](./docs/Quake.postman_collection.json)
