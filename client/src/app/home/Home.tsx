@@ -1,30 +1,11 @@
 import { Heading, Container, SimpleGrid, Flex, Text } from "@chakra-ui/react";
-import Map from "../core/components/Map";
-import QuakeCard from "./components/QuakeCard";
-import { SeismicApiResponse } from "../core/types";
-import Navigation from "./components/Navigation";
-import Limit from "./components/Limit";
-import Query from "./components/Query";
-import usePagination from "../core/hooks/usePagination";
 import { useQuery } from "react-query";
 
-const ENDPOINT = "http://localhost:3000/api/features";
+import usePagination from "../core/hooks/usePagination";
+import { getSeismicData } from "../core/api";
 
-async function getSeismicData(
-  page: string,
-  limit: string,
-  query: string
-): Promise<SeismicApiResponse> {
-  try {
-    const res = await fetch(
-      `${ENDPOINT}?page=${page}&limit=${limit}&mag_type=${query}`
-    );
-    const data = await res.json();
-    return data;
-  } catch (err) {
-    throw new Error(String(err));
-  }
-}
+import Map from "../core/components/Map";
+import { Query, Limit, Navigation, QuakeCard } from "./components";
 
 const Home = () => {
   const { page, limit, query } = usePagination();

@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { FaCheck } from "react-icons/fa";
 import { ImCross } from "react-icons/im";
+import QuakeComments from "./QuakeComments";
 
 import { SeismicItem } from "../../core/types";
 const QuakeDetails = ({
@@ -64,6 +65,7 @@ const QuakeDetails = ({
               <Text casing="capitalize">{item.longitude}</Text>
             </Stack>
           </Stack>
+          <QuakeComments id={item.id} />
         </ModalBody>
         <ModalFooter>
           <Button colorScheme="blue" mr={3} onClick={onClose}>

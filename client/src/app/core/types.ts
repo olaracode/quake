@@ -21,3 +21,10 @@ export type SeismicApiResponse = {
     per_page: number;
   };
 };
+
+export type SeismicComment = {
+  id: number;
+  content: string;
+  feature_id: string;
+  created_at: string;
+};
