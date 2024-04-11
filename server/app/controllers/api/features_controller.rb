@@ -20,7 +20,7 @@ class Api::FeaturesController < ApplicationController
                 id: feature.id,
                 type: "feature",
                 attributes: {
-                    external_id: feature.id,
+                    external_id: feature.external_id,
                     magnitude: feature.mag,
                     place: feature.place,
                     time: feature.time,

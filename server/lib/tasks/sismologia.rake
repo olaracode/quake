@@ -24,7 +24,7 @@ namespace :sismologia do
             next if geometry['coordinates'][1] < -90.0 || geometry['coordinates'][1] > 90.0
 
             # Crear o actualizar el registro
-            Feature.find_or_create_by(id: id) do |sismo|
+            Feature.find_or_create_by(external_id: id) do |sismo|
                 sismo.mag = properties['mag']
                 sismo.place = properties['place']
                 sismo.time = Time.at(properties['time'] / 1000)
