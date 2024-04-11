@@ -19,7 +19,7 @@ Quake es una aplicación fullstack que muestra los sismos ocurridos en el últim
 
 > Endpoint usado: [/earthquakes/feed/v1.0/summary/all_month.geojson]('https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_month.geojson')
 
-<img src="./image.png">
+<img src="./docs/image.png">
 
 ### Features
 
