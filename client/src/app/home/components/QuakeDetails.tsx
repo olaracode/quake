@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Modal,
   ModalOverlay,
@@ -26,7 +25,7 @@ const QuakeDetails = ({
   isOpen: boolean;
   onClose: () => void;
 }) => {
-  const date = new Date(item.time).toLocaleString("es-ES", {
+  const date = new Date(item.attributes.time).toLocaleString("es-ES", {
     weekday: "long",
     year: "numeric",
     month: "long",
@@ -38,13 +37,13 @@ const QuakeDetails = ({
     <Modal isOpen={isOpen} onClose={onClose}>
       <ModalOverlay />
       <ModalContent>
-        <ModalHeader>{item.title}</ModalHeader>
+        <ModalHeader>{item.attributes.title}</ModalHeader>
         <ModalCloseButton />
-        <ModalBody>
+        <ModalBody overflow={"auto"}>
           <Stack divider={<StackDivider borderColor="gray.200" />} spacing={3}>
             <Stack gap="2">
               <strong>Magnitud:</strong>
-              <Text casing="capitalize">{item.mag}</Text>
+              <Text casing="capitalize">{item.attributes.magnitude}</Text>
             </Stack>
             <Stack gap="2">
               <strong>Fecha:</strong>
@@ -53,16 +52,20 @@ const QuakeDetails = ({
             <Stack gap="2">
               <strong>Tsunami:</strong>
               <Text casing="capitalize">
-                {item.tsunami ? <FaCheck /> : <ImCross />}
+                {item.attributes.tsunami ? <FaCheck /> : <ImCross />}
               </Text>
             </Stack>
             <Stack gap="2">
               <strong>Latitud:</strong>
-              <Text casing="capitalize">{item.latitude}</Text>
+              <Text casing="capitalize">
+                {item.attributes.coordinates.latitude}
+              </Text>
             </Stack>
             <Stack gap="2">
               <strong>Longitud:</strong>
-              <Text casing="capitalize">{item.longitude}</Text>
+              <Text casing="capitalize">
+                {item.attributes.coordinates.longitude}
+              </Text>
             </Stack>
           </Stack>
           <QuakeComments id={item.id} />

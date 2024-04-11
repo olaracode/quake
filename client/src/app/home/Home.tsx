@@ -32,8 +32,15 @@ const Home = () => {
       </Flex>
       {isLoading ? (
         <SimpleGrid columns={{ sm: 1, md: 2 }} gap={3} pb="5">
-          <QuakeCard.Skeleton />
-          <QuakeCard.Skeleton />
+          {
+            // Skeletons are used to show a loading state while the data is being fetched
+            // We use the limit to show the same amount of skeletons as the limit to prevent
+            // layout shifting
+          }
+          {[...Array(parseInt(limit))].map((_, index) => (
+            <QuakeCard.Skeleton key={`quake-skeleton-${index}-${_}`} />
+          ))}
+          <Navigation.Skeleton />
         </SimpleGrid>
       ) : (
         <>

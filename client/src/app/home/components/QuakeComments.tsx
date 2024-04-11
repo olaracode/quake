@@ -1,10 +1,20 @@
-import { Box, Input, Button, Text, SimpleGrid } from "@chakra-ui/react";
+import {
+  Box,
+  Input,
+  Button,
+  Text,
+  SimpleGrid,
+  useToast,
+  Heading,
+} from "@chakra-ui/react";
 import { getSeismicComments, postSeismicData } from "../../core/api";
 import { useQuery, useMutation, useQueryClient } from "react-query";
 import { useRef } from "react";
 const QuakeComments = ({ id }: { id: string }) => {
   const inputRef = useRef<HTMLInputElement>(null);
+  const toast = useToast();
   const queryClient = useQueryClient();
+
   const { isError, data, isLoading } = useQuery(`quake:${id}:comments`, () =>
     getSeismicComments(id)
   );
@@ -21,6 +31,16 @@ const QuakeComments = ({ id }: { id: string }) => {
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (!inputRef.current) return;
+    if (inputRef.current.value.trim() === "") {
+      toast({
+        title: "Error",
+        description: "El comentario no puede estar vacío",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+      return;
+    }
     mutation.mutate(inputRef.current?.value);
     inputRef.current.value = "";
   };
@@ -30,7 +50,10 @@ const QuakeComments = ({ id }: { id: string }) => {
 
   return (
     <Box mt="2">
-      <SimpleGrid gap="2">
+      <Heading as="h4" fontSize="sm">
+        Comentarios: {data && data.length > 0 ? data.length : 0}
+      </Heading>
+      <SimpleGrid gap="2" maxH="200px" overflow={"auto"}>
         {data && data.length > 0 ? (
           data?.map((comment) => (
             <Box

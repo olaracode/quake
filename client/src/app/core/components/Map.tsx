@@ -37,10 +37,13 @@ const Map = ({ items = [] }: { items?: SeismicItem[] }) => {
         </Geographies>
         {items.map((item) => (
           <Marker
-            key={item.title}
-            coordinates={[item.longitude, item.latitude]}
+            key={item.attributes.title}
+            coordinates={[
+              item.attributes.coordinates.longitude,
+              item.attributes.coordinates.latitude,
+            ]}
           >
-            <Tooltip label={`${item.title}`}>
+            <Tooltip label={`${item.attributes.title}`}>
               <Icon
                 as={MdMyLocation}
                 _hover={{ color: "red.100" }}

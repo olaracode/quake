@@ -30,9 +30,10 @@ const Query = () => {
       }
     }
     const newUrl = new URL(window.location.href);
-    const stringifiedOptions = JSON.stringify(checkedOptions).replace(/"/g, "");
-    console.log(stringifiedOptions);
-    newUrl.searchParams.set("query", stringifiedOptions);
+    const magTypeParams = checkedOptions
+      .map((option) => `mag_type[]=${option}`)
+      .join("&");
+    newUrl.searchParams.set("query", magTypeParams);
     navigate(newUrl.search);
     onClose();
   };

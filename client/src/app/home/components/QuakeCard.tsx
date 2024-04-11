@@ -16,19 +16,21 @@ import QuakeDetails from "./QuakeDetails";
 
 const QuakeCard = ({ item }: { item: SeismicItem }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const date = new Date(item.time).toLocaleString("es-ES", {
+  const date = new Date(item.attributes.time).toLocaleString("es-ES", {
     weekday: "long",
     year: "numeric",
     month: "long",
     day: "numeric",
   });
 
-  const magnitude = `${item.mag.toFixed(2)} ${item.magType}`;
+  const magnitude = `${item.attributes.magnitude.toFixed(2)} ${
+    item.attributes.mag_type
+  }`;
   return (
     <Card bg="brand.card" color="text-white">
       <CardHeader display="flex" justifyContent={"space-between"}>
         <Heading as="h3" fontSize="md">
-          {item.title}
+          {item.attributes.title}
         </Heading>
       </CardHeader>
       <CardBody>

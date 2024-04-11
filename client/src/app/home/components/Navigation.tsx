@@ -37,4 +37,15 @@ const Navigation = ({
   );
 };
 
+const NavigationSkeleton = () => {
+  return (
+    <ButtonGroup isAttached size="xs">
+      <Button isLoading />
+      <Button isLoading />
+      <Button isLoading />
+    </ButtonGroup>
+  );
+};
+
+Navigation.Skeleton = NavigationSkeleton;
 export default Navigation;

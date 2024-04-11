@@ -1,16 +1,24 @@
-export type SeismicItem = {
-  id: string;
-  mag: number;
+export type SeismicAttributes = {
+  external_id: string;
+  magnitude: number;
+  mag_type: string;
   place: string;
   time: string;
-  url: string;
   tsunami: boolean;
-  magType: string;
   title: string;
-  longitude: number;
-  latitude: number;
-  created_at: string;
-  updated_at: string;
+  coordinates: {
+    longitude: number;
+    latitude: number;
+  };
+};
+
+export type SeismicItem = {
+  id: string;
+  type: string;
+  attributes: SeismicAttributes;
+  links: {
+    external_url: string;
+  };
 };
 
 export type SeismicApiResponse = {

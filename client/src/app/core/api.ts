@@ -8,7 +8,7 @@ export async function getSeismicData(
 ): Promise<SeismicApiResponse> {
   try {
     const res = await fetch(
-      `${ENDPOINT}?page=${page}&limit=${limit}&mag_type=${query}`
+      `${ENDPOINT}?page=${page}&per_page=${limit}&${query}`
     );
     const data = await res.json();
     return data;
